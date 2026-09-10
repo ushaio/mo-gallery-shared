@@ -1,0 +1,9 @@
+{
+  "name": "mo-gallery-shared",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Shared MO Gallery TypeScript packages consumed by mo-gallery-web and emulsion-desktop via pnpm git dependencies.",
+  "scripts": {
+    "lint": "pnpm -r --no-bail lint"
+  }
+}
