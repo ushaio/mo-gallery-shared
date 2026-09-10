@@ -12,7 +12,7 @@
     "./styles.css": "./src/tiptap-editor.css"
   },
   "dependencies": {
-    "@mo-gallery/ai-agent": "workspace:*",
+    "@mo-gallery/ai-agent": "github:ushaio/mo-gallery-shared#v0.1.0&path:packages/ai-agent",
     "@tiptap/core": "3.30.6",
     "@tiptap/extension-drag-handle-react": "3.30.6",
     "@tiptap/extension-horizontal-rule": "3.30.6",

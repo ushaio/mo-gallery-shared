@@ -29,7 +29,8 @@ pnpm git 依赖（子目录引用）：
 ## 发版流程
 
 1. 修改包代码，提交到 master。
-2. 打仓库统一 tag（如 `v0.2.0`）并推送。
-3. 在 mo-gallery-web 与 emulsion-desktop 中更新引用 tag 并执行 `pnpm install`。
+2. 将包间互联依赖（api-client→ai-agent、tiptap-editor→ai-agent、milkdown→tiptap-editor）的 git 引用更新为新 tag。
+3. 打仓库统一 tag（如 `v0.2.0`）并推送（包 `package.json` 的 `version` 与 tag 保持一致）。
+4. 在 mo-gallery-web 与 emulsion-desktop 中更新引用 tag 并执行 `pnpm install`。
 
-tag 与包版本号同步（`package.json` 的 `version` 与 tag 保持一致）。
+注意：包间互联依赖使用 `github:ushaio/mo-gallery-shared#<tag>&path:packages/<name>` 引用，每次发新 tag 时必须同步更新。
