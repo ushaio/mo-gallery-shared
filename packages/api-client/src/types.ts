@@ -44,7 +44,7 @@ export interface LensDto {
 export interface PhotoDto {
   id: string
   title: string
-  category: string
+  tags: string
   photoType?: 'digital' | 'film'
   filmRollId?: string | null
   filmRollName?: string | null

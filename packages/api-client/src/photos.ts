@@ -50,20 +50,20 @@ function extractUploadErrorMessage(responseText: string, status: number, statusT
   return `Upload failed (${status}${statusText ? ` ${statusText}` : ''})`
 }
 
-export async function getCategories(): Promise<string[]> {
-  return apiRequestData<string[]>('/api/categories')
+export async function getTags(): Promise<string[]> {
+  return apiRequestData<string[]>('/api/tags')
 }
 
 export async function getPhotos(params?: {
-  category?: string
+  tag?: string
   limit?: number
   page?: number
   pageSize?: number
   all?: boolean
 }): Promise<PhotoDto[]> {
-  const category = params?.category && params.category !== '全部' ? params.category : undefined
+  const tag = params?.tag && params.tag !== '全部' ? params.tag : undefined
   const query = buildQuery({
-    category,
+    tag,
     limit: params?.limit,
     page: params?.page,
     pageSize: params?.pageSize,
@@ -73,13 +73,13 @@ export async function getPhotos(params?: {
 }
 
 export async function getPhotosWithMeta(params?: {
-  category?: string
+  tag?: string
   page?: number
   pageSize?: number
 }): Promise<{ data: PhotoDto[]; meta: PhotoPaginationMeta }> {
-  const category = params?.category && params.category !== '全部' ? params.category : undefined
+  const tag = params?.tag && params.tag !== '全部' ? params.tag : undefined
   const query = buildQuery({
-    category,
+    tag,
     page: params?.page,
     pageSize: params?.pageSize,
   })
@@ -91,7 +91,7 @@ export async function getFeaturedPhotos(): Promise<PhotoDto[]> {
 }
 
 export interface AdminPhotosQuery {
-  category?: string
+  tag?: string
   search?: string
   photoType?: 'digital' | 'film'
   formats?: string[]
@@ -107,7 +107,7 @@ export async function getAdminPhotos(
   params: AdminPhotosQuery = {},
 ): Promise<{ data: PhotoDto[]; meta: PhotoPaginationMeta }> {
   const query = buildQuery({
-    category: params.category && params.category !== '全部' && params.category !== 'all' ? params.category : undefined,
+    tag: params.tag && params.tag !== '全部' && params.tag !== 'all' ? params.tag : undefined,
     search: params.search,
     photoType: params.photoType,
     formats: params.formats?.length ? params.formats.join(',') : undefined,
@@ -158,7 +158,7 @@ export async function uploadPhoto(input: {
   token: string
   file: File
   title: string
-  category: string | string[]
+  tags: string | string[]
   origin_flag?: 'web' | 'mobile' | 'desktop'
   storage_provider?: string
   storage_source_id?: string
@@ -175,8 +175,8 @@ export async function uploadPhoto(input: {
   const form = new FormData()
   form.set('file', input.file)
   form.set('title', input.title)
-  const categoryValue = Array.isArray(input.category) ? input.category.join(',') : input.category
-  form.set('category', categoryValue)
+  const tagsValue = Array.isArray(input.tags) ? input.tags.join(',') : input.tags
+  form.set('tags', tagsValue)
   if (input.origin_flag) form.set('origin_flag', input.origin_flag)
   if (input.storage_provider) form.set('storage_provider', input.storage_provider)
   if (input.storage_source_id) form.set('storage_source_id', input.storage_source_id)
@@ -201,7 +201,7 @@ export function uploadPhotoWithProgress(input: {
   token: string
   file: File
   title: string
-  category?: string | string[]
+  tags?: string | string[]
   origin_flag?: 'web' | 'mobile' | 'desktop'
   storage_provider?: string
   storage_source_id?: string
@@ -221,9 +221,9 @@ export function uploadPhotoWithProgress(input: {
     const form = new FormData()
     form.set('file', input.file)
     form.set('title', input.title)
-    if (input.category) {
-      const categoryValue = Array.isArray(input.category) ? input.category.join(',') : input.category
-      form.set('category', categoryValue)
+    if (input.tags) {
+      const tagsValue = Array.isArray(input.tags) ? input.tags.join(',') : input.tags
+      form.set('tags', tagsValue)
     }
     if (input.origin_flag) form.set('origin_flag', input.origin_flag)
     if (input.storage_provider) form.set('storage_provider', input.storage_provider)
@@ -398,7 +398,7 @@ export async function updatePhoto(input: {
     title?: string
     isFeatured?: boolean
     showFlag?: boolean
-    category?: string
+    tags?: string
     takenAt?: string | null
     storagePath?: string
     photoType?: 'digital' | 'film'
