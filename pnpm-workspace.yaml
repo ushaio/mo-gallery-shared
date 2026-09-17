@@ -1,7 +1,3 @@
-# 包之间用同仓库的 git tag 引用互相依赖（github:ushaio/mo-gallery-shared#v0.1.0&path:packages/x），
-# 这类 exotic subdep 默认被禁用，会导致 pnpm install 报 ERR_PNPM_EXOTIC_SUBDEP。
-# 消费方（mo-gallery-web / emulsion-desktop）也各自关掉了这个限制。
-blockExoticSubdeps: false
-
+# 包之间互为 workspace 成员，统一用 "workspace:*" 引用（不再有同仓库 git tag 互引）。
 packages:
   - packages/*

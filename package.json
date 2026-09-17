@@ -4,6 +4,9 @@
   "private": true,
   "description": "Shared MO Gallery TypeScript packages consumed by mo-gallery-web and emulsion-desktop via pnpm git dependencies.",
   "scripts": {
-    "lint": "pnpm -r --no-bail lint"
+    "lint": "pnpm -r --no-bail lint",
+    "sync": "node scripts/sync-packages.mjs",
+    "sync:check": "node scripts/sync-packages.mjs --check",
+    "sync:watch": "node scripts/sync-packages.mjs --watch"
   }
 }

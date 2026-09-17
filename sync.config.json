@@ -1,0 +1,9 @@
+{
+  "$comment": "mo-gallery-shared/packages/* 的同步目标。path 相对本文件所在目录（即 mo-gallery-shared/）。新增消费方仓库时在此追加一条，然后运行 pnpm sync。manifestName 是写在目标仓库根的内容哈希清单，用于漂移检测。consumerOnly 列出消费方专有的包名：它们只在消费方仓库里维护，不属于共享包；如果源头 packages/ 或清单里出现同名包，同步会直接报错。",
+  "manifestName": ".mo-gallery-shared-sync.json",
+  "consumerOnly": ["plugin-sdk", "emulsion-mcp"],
+  "targets": [
+    { "name": "mo-gallery-web", "path": "../mo-gallery-web" },
+    { "name": "emulsion-desktop", "path": "../emulsion-desktop" }
+  ]
+}
