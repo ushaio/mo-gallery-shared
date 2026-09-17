@@ -117,6 +117,14 @@ export interface StorageSourceDto {
   id: string
   name: string
   type: 'local' | 'github' | 's3'
+  /**
+   * Concrete storage product behind this source, e.g. 'cloudflare-r2',
+   * 'qiniu-kodo', 'aliyun-oss', 'tencent-cos', 'aws-s3', 'minio', 'github',
+   * 'local'. `type` only names the protocol family, so every S3-compatible
+   * provider collapses to 's3'; vendor is what tells them apart and is shared
+   * with the Desktop client. Free-form: unknown providers are stored as given.
+   */
+  vendor?: string | null
   accessKey?: string | null
   secretKey?: string | null
   bucket?: string | null
